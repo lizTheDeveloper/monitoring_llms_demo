@@ -14,6 +14,13 @@ __pycache__/
 results/
 *.html
 
+# Monitoring results (keep config, ignore generated data)
+monitoring_results/
+monitoring.log
+
+# Keep alert config template
+!alert_config.json.example
+
 # IDE
 .vscode/
 .idea/

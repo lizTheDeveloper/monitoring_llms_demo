@@ -1,0 +1,17 @@
+{
+  "data_integrity": {
+    "missing_values_threshold": 0.05,
+    "duplicates_threshold": 0.01,
+    "data_quality_score": 0.8
+  },
+  "data_drift": {
+    "drift_score_threshold": 0.2,
+    "feature_drift_threshold": 0.15,
+    "label_drift_threshold": 0.1
+  },
+  "model_performance": {
+    "accuracy_threshold": 0.7,
+    "performance_degradation": 0.1
+  }
+}
+
