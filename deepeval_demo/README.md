@@ -40,6 +40,7 @@ python basic_metrics.py
 Demonstrates Retrieval-Augmented Generation evaluation:
 - **RAG Triad**: Contextual Relevancy, Recall, and Precision
 - **Faithfulness**: Ensures output is grounded in retrieved context
+- **Enhanced Hallucination Detection**: Various types of hallucinations (fabricated facts, invented citations, unsupported claims, contradictory information, partial hallucinations)
 - **Comprehensive RAG Evaluation**: Multiple metrics together
 
 **Run:**
@@ -57,6 +58,62 @@ Demonstrates multi-turn conversation evaluation:
 **Run:**
 ```bash
 python conversational_metrics.py
+```
+
+### 4. Toxicity Detection (`toxicity_metrics.py`) ⚠️ HIGH PRIORITY
+Demonstrates toxicity detection for production user-facing agents:
+- **Toxicity Detection**: Identifies toxic, harmful, or inappropriate content
+- **Threshold Discussion**: Importance of high thresholds (>= 0.95) for safety
+- **Edge Cases**: Handling sarcasm and cultural context
+
+**Run:**
+```bash
+python toxicity_metrics.py
+```
+
+### 5. Bias Detection (`bias_metrics.py`) ⚠️ HIGH PRIORITY
+Demonstrates bias detection for fairness and compliance:
+- **Demographic Bias**: Detects bias based on race, gender, age, etc.
+- **Cultural Bias**: Identifies cultural stereotypes and bias
+- **Implicit Bias**: Detects subtle, unconscious biases
+
+**Run:**
+```bash
+python bias_metrics.py
+```
+
+### 6. Fairness Evaluation (`fairness_metrics.py`) ⚠️ HIGH PRIORITY
+Demonstrates fairness evaluation for equitable outcomes:
+- **Equal vs. Equitable**: Understanding when to use each approach
+- **Unfair Treatment Examples**: Identifying discriminatory responses
+- **Context-Specific Fairness**: Fairness in different contexts (hiring, service, education)
+
+**Run:**
+```bash
+python fairness_metrics.py
+```
+
+### 7. Code Quality Metrics (`code_quality_metrics.py`)
+Demonstrates monitoring for code generation agents:
+- **Code Security**: Detects vulnerabilities (SQL injection, XSS, hardcoded secrets)
+- **Code Correctness**: Verifies code implements requested functionality
+- **Code Quality**: Evaluates readability, maintainability, and best practices
+
+**Run:**
+```bash
+python code_quality_metrics.py
+```
+
+### 8. Comprehensive Alignment Demo (`comprehensive_alignment_demo.py`)
+Demonstrates combining all critical alignment metrics:
+- **Production Monitoring**: Using multiple metrics together
+- **Threshold Selection**: Understanding trade-offs and recommendations
+- **Metric Combination Strategies**: Different approaches for different use cases
+- **RAG with Alignment**: Combining RAG metrics with alignment metrics
+
+**Run:**
+```bash
+python comprehensive_alignment_demo.py
 ```
 
 ## Key Concepts
@@ -90,9 +147,26 @@ evaluate(test_cases=[test_case], metrics=[metric])
 - [DeepEval GitHub](https://github.com/confident-ai/deepeval)
 - [DeepEval Metrics Guide](https://docs.confident-ai.com/docs/metrics-introduction)
 
+## Metric Priorities
+
+### High Priority (Critical for Production)
+- **Toxicity Detection**: Use threshold >= 0.95
+- **Bias Detection**: Use threshold >= 0.8
+- **Fairness Evaluation**: Use threshold >= 0.8
+
+### Medium Priority
+- **Code Quality Metrics**: Security (>= 0.95), Correctness (>= 0.8), Quality (>= 0.7)
+- **Enhanced Hallucination Detection**: Use threshold >= 0.7
+
+### Standard Metrics
+- **Answer Relevancy**: Use threshold >= 0.7
+- **RAG Metrics**: Use threshold >= 0.7
+- **Conversational Metrics**: Use threshold >= 0.7
+
 ## Notes
 
 - All demos use `gpt-4o-mini` for cost efficiency. You can change the model in each script.
-- Thresholds are set to 0.7 by default but can be adjusted.
+- Thresholds vary by metric type (see priorities above).
 - The `include_reason=True` parameter provides explanations for scores.
+- For production monitoring, combine multiple metrics for comprehensive evaluation.
 
