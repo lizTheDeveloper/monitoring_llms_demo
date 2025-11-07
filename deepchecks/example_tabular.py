@@ -168,20 +168,35 @@ def main():
     logger.info("DeepChecks validation pipeline completed successfully")
     
     # Display results summary
+    def count_passed(results):
+        """Count passed checks, handling both CheckResult and CheckFailure."""
+        passed = 0
+        for r in results:
+            if hasattr(r, 'passed_conditions'):
+                if r.passed_conditions():
+                    passed += 1
+        return passed
+    
     print("\n" + "="*50)
     print("DATA INTEGRITY SUMMARY")
     print("="*50)
-    print(integrity_result)
+    print(f"Total checks: {len(integrity_result.results)}")
+    print(f"Passed: {count_passed(integrity_result.results)}")
+    print(f"Failed: {len(integrity_result.results) - count_passed(integrity_result.results)}")
     
     print("\n" + "="*50)
     print("TRAIN-TEST VALIDATION SUMMARY")
     print("="*50)
-    print(validation_result)
+    print(f"Total checks: {len(validation_result.results)}")
+    print(f"Passed: {count_passed(validation_result.results)}")
+    print(f"Failed: {len(validation_result.results) - count_passed(validation_result.results)}")
     
     print("\n" + "="*50)
     print("MODEL EVALUATION SUMMARY")
     print("="*50)
-    print(evaluation_result)
+    print(f"Total checks: {len(evaluation_result.results)}")
+    print(f"Passed: {count_passed(evaluation_result.results)}")
+    print(f"Failed: {len(evaluation_result.results) - count_passed(evaluation_result.results)}")
 
 
 if __name__ == '__main__':

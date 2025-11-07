@@ -20,9 +20,11 @@ from langchain_openai import ChatOpenAI
 # Load environment variables
 load_dotenv()
 
-# Initialize the evaluator LLM
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-evaluator_llm = LangchainLLMWrapper(llm)
+
+def get_evaluator_llm():
+    """Initialize and return the evaluator LLM"""
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    return LangchainLLMWrapper(llm)
 
 
 def create_toxicity_dataset():

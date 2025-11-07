@@ -125,6 +125,11 @@ This demo shows how to measure and improve these alignment properties using auto
    python basic_metrics.py
    python rag_metrics.py
    python conversational_metrics.py
+   python toxicity_metrics.py
+   python bias_metrics.py
+   python fairness_metrics.py
+   python code_quality_metrics.py
+   python comprehensive_alignment_demo.py
    ```
    
    **Windows**:
@@ -136,6 +141,11 @@ This demo shows how to measure and improve these alignment properties using auto
    python basic_metrics.py
    python rag_metrics.py
    python conversational_metrics.py
+   python toxicity_metrics.py
+   python bias_metrics.py
+   python fairness_metrics.py
+   python code_quality_metrics.py
+   python comprehensive_alignment_demo.py
    ```
 
    **RAGAs Demo**:
@@ -177,6 +187,10 @@ This demo shows how to measure and improve these alignment properties using auto
    source venv/bin/activate
    pip install -r requirements.txt
    python example_tabular.py
+   python llm_data_validation.py
+   python monitoring_dashboard.py
+   python automated_monitoring.py
+   python integration_example.py
    ```
    
    **Windows**:
@@ -186,6 +200,10 @@ This demo shows how to measure and improve these alignment properties using auto
    venv\Scripts\activate
    pip install -r requirements.txt
    python example_tabular.py
+   python llm_data_validation.py
+   python monitoring_dashboard.py
+   python automated_monitoring.py
+   python integration_example.py
    ```
 
 ## Demo Structure
@@ -197,6 +215,11 @@ monitoring_llms_demo/
 │   ├── basic_metrics.py        # Basic LLM evaluation metrics
 │   ├── rag_metrics.py          # RAG-specific evaluation
 │   ├── conversational_metrics.py  # Multi-turn conversation evaluation
+│   ├── toxicity_metrics.py     # Toxicity detection
+│   ├── bias_metrics.py         # Bias detection
+│   ├── fairness_metrics.py     # Fairness evaluation
+│   ├── code_quality_metrics.py # Code generation agent monitoring
+│   ├── comprehensive_alignment_demo.py  # Production monitoring demo
 │   ├── requirements.txt
 │   ├── README.md
 │   └── NEXT_STEPS.md           # Implementation roadmap
@@ -212,6 +235,10 @@ monitoring_llms_demo/
 │   └── NEXT_STEPS.md           # Implementation roadmap
 └── deepchecks/                 # DeepChecks demonstrations
     ├── example_tabular.py      # Data and model validation
+    ├── llm_data_validation.py  # LLM system data validation
+    ├── monitoring_dashboard.py # Production monitoring dashboard
+    ├── automated_monitoring.py # Automated monitoring workflow
+    ├── integration_example.py  # End-to-end integration example
     ├── requirements.txt
     ├── README.md
     └── NEXT_STEPS.md           # Implementation roadmap
@@ -245,7 +272,29 @@ Each demo folder has a `NEXT_STEPS.md` file tracking what's implemented and what
    - Knowledge retention: Does the model remember context?
    - Goal accuracy: Does the conversation achieve its goal?
 
-**Implementation Status**: See [deepeval_demo/NEXT_STEPS.md](deepeval_demo/NEXT_STEPS.md) for planned additions including toxicity detection, bias detection, fairness evaluation, and code generation monitoring.
+4. **`toxicity_metrics.py`**: Toxicity detection for production safety
+   - Detects harmful, offensive, or inappropriate content
+   - High threshold (0.95+) for production use
+
+5. **`bias_metrics.py`**: Bias detection for fairness
+   - Detects demographic, cultural, and implicit bias
+   - Examples of biased vs. unbiased responses
+
+6. **`fairness_metrics.py`**: Fairness evaluation for equitable outcomes
+   - Evaluates fair and equitable treatment
+   - Equal vs. equitable treatment scenarios
+
+7. **`code_quality_metrics.py`**: Code generation agent monitoring
+   - Code security: Detects vulnerabilities and insecure configurations
+   - Code correctness: Validates functional correctness
+   - Code quality: Assesses structure and best practices
+
+8. **`comprehensive_alignment_demo.py`**: Production monitoring with all metrics
+   - Combines all critical metrics together
+   - Threshold selection guidance
+   - Metric combination strategies
+
+**Implementation Status**: ✅ **All critical metrics implemented**. See [deepeval_demo/NEXT_STEPS.md](deepeval_demo/NEXT_STEPS.md) for complete implementation status and optional future enhancements.
 
 ### RAGAs Demos
 
@@ -265,8 +314,6 @@ Each demo folder has a `NEXT_STEPS.md` file tracking what's implemented and what
    - Agent goal accuracy: Did the agent achieve the user's goal?
    - Tool call accuracy: Were tools used correctly?
 
-**Implementation Status**: See [ragas_demo/NEXT_STEPS.md](ragas_demo/NEXT_STEPS.md) for planned additions including toxicity detection, bias detection, fairness evaluation, and code generation monitoring.
-
 4. **`toxicity_bias_fairness.py`**: Critical alignment metrics for production
    - Toxicity detection: Identifies harmful or offensive content
    - Bias detection: Evaluates bias in responses
@@ -281,6 +328,8 @@ Each demo folder has a `NEXT_STEPS.md` file tracking what's implemented and what
    - Shows threshold selection and trade-offs
    - Demonstrates production best practices
 
+**Implementation Status**: ✅ **All critical metrics implemented**. See [ragas_demo/NEXT_STEPS.md](ragas_demo/NEXT_STEPS.md) for complete implementation status and optional future enhancements.
+
 ### DeepChecks Demo
 
 1. **`example_tabular.py`**: Data and model validation
@@ -288,7 +337,26 @@ Each demo folder has a `NEXT_STEPS.md` file tracking what's implemented and what
    - Train-test validation: Data drift, distribution shifts
    - Model evaluation: Performance metrics, feature importance
 
-**Implementation Status**: See [deepchecks/NEXT_STEPS.md](deepchecks/NEXT_STEPS.md) for implementation status. DeepChecks is primarily for traditional ML, but includes LLM data validation examples.
+2. **`llm_data_validation.py`**: LLM system data validation
+   - RAG system metadata validation
+   - Training data quality validation for LLM fine-tuning
+   - Data drift detection for production LLM pipelines
+
+3. **`monitoring_dashboard.py`**: Production monitoring dashboard
+   - Enhanced reporting and visualization
+   - Alert configuration and tracking
+   - Historical results tracking
+
+4. **`automated_monitoring.py`**: Automated monitoring workflow
+   - Scheduled monitoring support
+   - Command-line interface
+   - Configurable validation suites
+
+5. **`integration_example.py`**: End-to-end integration example
+   - Complete monitoring pipeline
+   - Data quality → drift → model evaluation flow
+
+**Implementation Status**: ✅ **All critical features implemented**. See [deepchecks/NEXT_STEPS.md](deepchecks/NEXT_STEPS.md) for complete implementation status and optional future enhancements.
 
 ## Quick Navigation
 
