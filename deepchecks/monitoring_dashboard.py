@@ -101,33 +101,52 @@ class MonitoringDashboard:
         if timestamp is None:
             timestamp = datetime.now()
         
+        def count_passed(results):
+            """Count passed checks, handling both CheckResult and CheckFailure."""
+            passed = 0
+            for r in results:
+                if hasattr(r, 'passed_conditions'):
+                    if r.passed_conditions():
+                        passed += 1
+            return passed
+        
+        def count_warnings(results):
+            """Count warnings, handling both CheckResult and CheckFailure."""
+            warnings = 0
+            for r in results:
+                if hasattr(r, 'have_warnings'):
+                    if r.have_warnings():
+                        warnings += 1
+            return warnings
+        
         analysis = {
             'timestamp': timestamp.isoformat(),
             'suite_name': suite_name,
             'total_checks': len(result.results),
-            'passed_checks': sum(1 for r in result.results if r.passed_conditions()),
-            'failed_checks': sum(1 for r in result.results if not r.passed_conditions()),
-            'warnings': sum(1 for r in result.results if r.have_warnings()),
+            'passed_checks': count_passed(result.results),
+            'failed_checks': len(result.results) - count_passed(result.results),
+            'warnings': count_warnings(result.results),
             'checks': []
         }
         
-        # Analyze individual checks
+            # Analyze individual checks
         for check_result in result.results:
             check_analysis = {
-                'name': check_result.get_header(),
-                'passed': check_result.passed_conditions(),
-                'has_warnings': check_result.have_warnings(),
+                'name': check_result.get_header() if hasattr(check_result, 'get_header') else str(type(check_result).__name__),
+                'passed': check_result.passed_conditions() if hasattr(check_result, 'passed_conditions') else False,
+                'has_warnings': check_result.have_warnings() if hasattr(check_result, 'have_warnings') else False,
                 'conditions': []
             }
             
             # Extract condition results
             if hasattr(check_result, 'conditions_results'):
                 for condition in check_result.conditions_results:
-                    check_analysis['conditions'].append({
-                        'name': condition.get('name', 'Unknown'),
-                        'passed': condition.get('passed', False),
-                        'value': condition.get('value', None)
-                    })
+                    condition_dict = {
+                        'name': getattr(condition, 'name', 'Unknown') if hasattr(condition, 'name') else str(condition),
+                        'passed': getattr(condition, 'passed', False) if hasattr(condition, 'passed') else False,
+                        'value': getattr(condition, 'value', None) if hasattr(condition, 'value') else None
+                    }
+                    check_analysis['conditions'].append(condition_dict)
             
             analysis['checks'].append(check_analysis)
         

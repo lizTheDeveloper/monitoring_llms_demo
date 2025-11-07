@@ -14,7 +14,7 @@ from datasets import Dataset
 from ragas import evaluate
 from ragas.metrics import (
     answer_correctness,
-    context_relevancy,
+    ContextRelevance,
     AspectCritic,
     RubricsScore,
 )
@@ -110,7 +110,7 @@ def run_advanced_evaluation():
     # Define metrics
     metrics = [
         answer_correctness,
-        context_relevancy,
+        ContextRelevance(),
         clarity_critic,
         comprehensiveness_score,
     ]

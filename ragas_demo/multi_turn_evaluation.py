@@ -22,9 +22,11 @@ from langchain_openai import ChatOpenAI
 # Load environment variables
 load_dotenv()
 
-# Initialize the evaluator LLM
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-evaluator_llm = LangchainLLMWrapper(llm)
+
+def get_evaluator_llm():
+    """Initialize and return the evaluator LLM"""
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    return LangchainLLMWrapper(llm)
 
 
 def create_restaurant_booking_sample():
@@ -110,6 +112,9 @@ async def evaluate_agent_goal_accuracy():
     print("\nConversation Sample:")
     for message in sample.user_input:
         print(f"  {type(message).__name__}: {message.content}")
+    
+    # Initialize evaluator LLM
+    evaluator_llm = get_evaluator_llm()
     
     # Evaluate with reference
     scorer_with_ref = AgentGoalAccuracyWithReference(llm=evaluator_llm)

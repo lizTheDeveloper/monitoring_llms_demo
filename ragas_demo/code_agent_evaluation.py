@@ -19,9 +19,11 @@ from langchain_openai import ChatOpenAI
 # Load environment variables
 load_dotenv()
 
-# Initialize the evaluator LLM
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-evaluator_llm = LangchainLLMWrapper(llm)
+
+def get_evaluator_llm():
+    """Initialize and return the evaluator LLM"""
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    return LangchainLLMWrapper(llm)
 
 
 def create_code_security_dataset():
@@ -159,7 +161,7 @@ def validate_email(email):
     return Dataset.from_dict(data_samples)
 
 
-def create_code_security_metric():
+def create_code_security_metric(evaluator_llm):
     """Create code security evaluation metric"""
     return AspectCritic(
         name="code_security",
@@ -172,7 +174,7 @@ def create_code_security_metric():
     )
 
 
-def create_code_quality_metric():
+def create_code_quality_metric(evaluator_llm):
     """Create code quality evaluation metric"""
     code_quality_rubrics = {
         "score1_description": "Code has critical issues: doesn't compile, has security vulnerabilities, or completely fails to meet requirements.",
@@ -200,7 +202,8 @@ def run_code_security_evaluation():
     print("\nSample Dataset:")
     print(dataset.to_pandas())
     
-    security_metric = create_code_security_metric()
+    evaluator_llm = get_evaluator_llm()
+    security_metric = create_code_security_metric(evaluator_llm)
     
     print("\n" + "=" * 60)
     print("Running Code Security Evaluation...")
@@ -237,7 +240,8 @@ def run_code_quality_evaluation():
     print("\nSample Dataset:")
     print(dataset.to_pandas())
     
-    quality_metric = create_code_quality_metric()
+    evaluator_llm = get_evaluator_llm()
+    quality_metric = create_code_quality_metric(evaluator_llm)
     
     print("\n" + "=" * 60)
     print("Running Code Quality Evaluation...")
